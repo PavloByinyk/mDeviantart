@@ -1,8 +1,13 @@
 package com.example.android.mddeviantart.remote;
 
+import com.example.android.mddeviantart.pojo.response.AuthResponse;
+import com.example.android.mddeviantart.pojo.response.ImagesResponse;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by android on 11/15/17.
@@ -11,28 +16,19 @@ import retrofit2.http.GET;
 public interface RetrofitService {
 
 
-    @GET("response.json")
-    Call<ResponseBody> getData();
+    @GET("oauth2/token?grant_type=client_credentials")
+    Call<AuthResponse> auth(@Query("client_id") int id, @Query("client_secret") String secretKey);
 
 
-//    @GET("response.json")
-//    fun getData(): Call<PlaceResponse>
-//    @POST("user/login")
-//    fun loginUp(@Body body: UserLoginBody): Call<LoginResponse>
-//
-//    @POST("user/login")
-//    fun loginUp(@Body body: FacebookLoginBody): Call<LoginResponse>
-//
-//    @POST("user/logout")
-//    fun logout(@Header("X-Token") header: String): Call<ResponseBody>
-//
-//    @PATCH("user/{userId}")
-//    fun deactivateAccount(@Header("X-Token") header: String,
-//                          @Path("userId") userId: String): Call<ResponseBody>
-//
-//    @POST("user/register")
-//    fun registrationUSer(@Body body: UserRegistrationBody): Call<LoginResponse>
-//
-//    @GET("user/{user_id}/items")
-//    fun getTradedItemsData(@Path("user_id") userId: Int): Call<List<TradedItemR>>
+    @GET("api/v1/oauth2/browse/hot?offset=[offset]&access_token=[access_token]")
+    Call<ImagesResponse> getHot(@Query("access_token") String token, @Query("offset") int offset);
+
+
+    //morelikethis?seed=C0801604-7894-532E-BC8F-C4EE47273E6D&category=photography&access_token=Alph4num3r1ct0k3nv4lu3
+    @GET("api/v1/oauth2/browse/morelikethis?seed=C0801604-7894-532E-BC8F-C4EE47273E6D&category=photography&access_token=[access_token]")
+    Call<ImagesResponse> getPopular(@Query("access_token") String token, @Query("offset") int offset, @Query("limit") int limit);
+
+    @GET("api/v1/oauth2/browse/popular?category_path=photography&q=clouds&timerange=1week&limit=[limit]&access_token=[access_token]")
+    Call<ImagesResponse> getPhotography(@Query("access_token") String token, @Query("offset") int offset, @Query("limit") int limit);
+
 }

@@ -12,27 +12,22 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class RetrofitClient {
 
-    private final static String TAG = RetrofitClient.class.getSimpleName();
 
     private static Retrofit retrofit = null;
 
-    private static String mToken;
 
     public static Retrofit getClient(String baseUrl, boolean recreate) {
 
         if (retrofit == null || recreate) {
 
             OkHttpClient defaultHttpClient = new OkHttpClient.Builder()
-//                    .addInterceptor(new ReceiveCookiesInterceptor())
-                    //.addInterceptor(getLoggingInterceptorInstance())
-                    //.addInterceptor(new TokenInterceptor())
+                    .addInterceptor(new TokenInterceptor())
                     .readTimeout(18, TimeUnit.SECONDS)
                     .connectTimeout(18, TimeUnit.SECONDS)
                     .build();
@@ -58,7 +53,7 @@ public class RetrofitClient {
             Request request = chain.request();
 
             Request.Builder builder = request.newBuilder();
-            //builder.addHeader("Accept","application/json");
+            builder.addHeader("Accept","application/json");
 
             return chain.proceed(builder.build());
         }
@@ -99,10 +94,10 @@ public class RetrofitClient {
 //        }
 //    }
 //
-    private static HttpLoggingInterceptor getLoggingInterceptorInstance() {
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        return loggingInterceptor;
-    }
+//    private static HttpLoggingInterceptor getLoggingInterceptorInstance() {
+//        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+//        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        return loggingInterceptor;
+//    }
 
 }

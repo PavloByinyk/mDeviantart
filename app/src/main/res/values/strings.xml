@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">mDdeviantart</string>
+
+
+
+    //labels
+    <string name="label_fragment_first">Hot</string>
+    <string name="label_fragment_second">More like this</string>
+    <string name="label_fragment_third">Photos</string>
+
+
+
+    //msgs
+    <string name="msg_success">Success</string>
+    <string name="msg_error">Error</string>
+
 </resources>
