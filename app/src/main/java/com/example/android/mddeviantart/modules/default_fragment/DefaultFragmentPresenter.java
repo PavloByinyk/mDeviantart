@@ -1,21 +1,21 @@
-package com.example.android.mddeviantart.modules.first_fragment;
+package com.example.android.mddeviantart.modules.default_fragment;
 
 
 import com.example.android.mddeviantart.R;
 import com.example.android.mddeviantart.base_mvp.BasePresenter;
 import com.example.android.mddeviantart.pojo.response.ImagesResponse;
 
-public class FirstFragmentPresenter extends BasePresenter<IFirstFragmentContract.IModel, IFirstFragmentContract.IView>
-        implements IFirstFragmentContract.IPresenter, FirstFragmentModel.IRequestListener{
+public class DefaultFragmentPresenter extends BasePresenter<IDefaultFragmentContract.IModel, IDefaultFragmentContract.IView>
+        implements IDefaultFragmentContract.IPresenter, DefaultFragmentModel.IRequestListener{
 
 
-    public FirstFragmentPresenter(IFirstFragmentContract.IView mView) {
+    public DefaultFragmentPresenter(IDefaultFragmentContract.IView mView) {
         super(mView);
     }
 
     @Override
-    protected IFirstFragmentContract.IModel provideModel() {
-        return new FirstFragmentModel();
+    protected IDefaultFragmentContract.IModel provideModel() {
+        return new DefaultFragmentModel();
     }
 
 
@@ -23,7 +23,7 @@ public class FirstFragmentPresenter extends BasePresenter<IFirstFragmentContract
     public void onStart() {
         super.onStart();
         getView().initViews();
-        getModel().requestLoadImages(this);
+        //getModel().requestLoadImages(this);
     }
 
 
@@ -40,7 +40,8 @@ public class FirstFragmentPresenter extends BasePresenter<IFirstFragmentContract
     }
 
     @Override
-    public void getMoreImages() {
-        getModel().requestLoadImages(this);
+    public void getImages(int tag) {
+        getModel().requestLoadImages(this, tag);
     }
+
 }

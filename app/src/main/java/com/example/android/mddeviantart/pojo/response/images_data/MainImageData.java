@@ -1,8 +1,11 @@
 package com.example.android.mddeviantart.pojo.response.images_data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class MainImageData{
+public class MainImageData implements Parcelable {
 	private boolean allowsComments;
 	private boolean isFavourited;
 	private boolean isMature;
@@ -21,6 +24,7 @@ public class MainImageData{
 	private Preview preview;
 	private Content content;
 	private List<Thumbs> thumbs;
+
 
 	public Author getAuthor() {
 		return author;
@@ -167,4 +171,63 @@ public class MainImageData{
 	}
 
 
+
+
+	protected MainImageData(Parcel in) {
+		allowsComments = in.readByte() != 0;
+		isFavourited = in.readByte() != 0;
+		isMature = in.readByte() != 0;
+		title = in.readString();
+		url = in.readString();
+		downloadFilesize = in.readInt();
+		isDeleted = in.readByte() != 0;
+		categoryPath = in.readString();
+		publishedTime = in.readInt();
+		isDownloadable = in.readByte() != 0;
+		deviationid = in.readString();
+		category = in.readString();
+		author = in.readParcelable(Author.class.getClassLoader());
+		stats = in.readParcelable(Stats.class.getClassLoader());
+		preview = in.readParcelable(Preview.class.getClassLoader());
+		content = in.readParcelable(Content.class.getClassLoader());
+		thumbs = in.createTypedArrayList(Thumbs.CREATOR);
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeByte((byte) (allowsComments ? 1 : 0));
+		dest.writeByte((byte) (isFavourited ? 1 : 0));
+		dest.writeByte((byte) (isMature ? 1 : 0));
+		dest.writeString(title);
+		dest.writeString(url);
+		dest.writeInt(downloadFilesize);
+		dest.writeByte((byte) (isDeleted ? 1 : 0));
+		dest.writeString(categoryPath);
+		dest.writeInt(publishedTime);
+		dest.writeByte((byte) (isDownloadable ? 1 : 0));
+		dest.writeString(deviationid);
+		dest.writeString(category);
+		dest.writeParcelable(author, flags);
+		dest.writeParcelable(stats, flags);
+		dest.writeParcelable(preview, flags);
+		dest.writeParcelable(content, flags);
+		dest.writeTypedList(thumbs);
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	public static final Creator<MainImageData> CREATOR = new Creator<MainImageData>() {
+		@Override
+		public MainImageData createFromParcel(Parcel in) {
+			return new MainImageData(in);
+		}
+
+		@Override
+		public MainImageData[] newArray(int size) {
+			return new MainImageData[size];
+		}
+	};
 }

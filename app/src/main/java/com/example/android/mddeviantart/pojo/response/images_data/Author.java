@@ -1,10 +1,14 @@
 package com.example.android.mddeviantart.pojo.response.images_data;
 
-public class Author{
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Author implements Parcelable {
 	private String usericon;
 	private String type;
 	private String userid;
 	private String username;
+
 
 	public void setUsericon(String usericon){
 		this.usericon = usericon;
@@ -48,4 +52,37 @@ public class Author{
 			",username = '" + username + '\'' + 
 			"}";
 		}
+
+
+	protected Author(Parcel in) {
+		usericon = in.readString();
+		type = in.readString();
+		userid = in.readString();
+		username = in.readString();
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(usericon);
+		dest.writeString(type);
+		dest.writeString(userid);
+		dest.writeString(username);
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	public static final Creator<Author> CREATOR = new Creator<Author>() {
+		@Override
+		public Author createFromParcel(Parcel in) {
+			return new Author(in);
+		}
+
+		@Override
+		public Author[] newArray(int size) {
+			return new Author[size];
+		}
+	};
 }

@@ -4,14 +4,17 @@
 
 
     //labels
-    <string name="label_fragment_first">Hot</string>
-    <string name="label_fragment_second">More like this</string>
-    <string name="label_fragment_third">Photos</string>
+    <string name="label_fragment_hot">Hot</string>
+    <string name="label_fragment_likes">More like this</string>
+    <string name="label_fragment_photos">Photos</string>
+    <string name="label_activity_main">Test</string>
+    <string name="label_activity_detail">Detail</string>
 
 
 
     //msgs
     <string name="msg_success">Success</string>
     <string name="msg_error">Error</string>
+    <string name="msg_authorization">Authorization..</string>
 
 </resources>

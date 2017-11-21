@@ -25,7 +25,7 @@ public class MainImageAdapter extends RecyclerView.Adapter<MainImageAdapter.Imag
 
 
     public interface MainImageClickListener{
-        void onImageClick(MainImageData imageData);
+        void onImageClick(List<MainImageData> imageData);
     }
 
 
@@ -88,7 +88,7 @@ public class MainImageAdapter extends RecyclerView.Adapter<MainImageAdapter.Imag
             ivImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onImageClick(mainImageData);
+                    listener.onImageClick(list);
                 }
             });
         }

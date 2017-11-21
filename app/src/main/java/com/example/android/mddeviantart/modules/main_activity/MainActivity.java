@@ -72,6 +72,7 @@ public class MainActivity extends BaseActivity implements IMainActivityContract.
     public void showProgressBar(boolean showProgress) {
 
         if(showProgress && !progressDialog.isShowing()){
+            progressDialog.setMessage(getString(R.string.msg_authorization));
             progressDialog.show();
             progressDialog.setCancelable(false);
         }else if(!showProgress && progressDialog.isShowing()){

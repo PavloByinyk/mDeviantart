@@ -1,10 +1,15 @@
 package com.example.android.mddeviantart.pojo.response.images_data;
 
-public class Preview{
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Preview implements Parcelable {
 	private String src;
 	private boolean transparency;
 	private int width;
 	private int height;
+
+
 
 	public void setSrc(String src){
 		this.src = src;
@@ -48,4 +53,37 @@ public class Preview{
 			",height = '" + height + '\'' + 
 			"}";
 		}
+
+
+
+	protected Preview(Parcel in) {
+		src = in.readString();
+		transparency = in.readByte() != 0;
+		width = in.readInt();
+		height = in.readInt();
+	}
+
+	public static final Creator<Preview> CREATOR = new Creator<Preview>() {
+		@Override
+		public Preview createFromParcel(Parcel in) {
+			return new Preview(in);
+		}
+
+		@Override
+		public Preview[] newArray(int size) {
+			return new Preview[size];
+		}
+	};
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel parcel, int i) {
+		parcel.writeString(src);
+		parcel.writeByte((byte) (transparency ? 1 : 0));
+		parcel.writeInt(width);
+		parcel.writeInt(height);
+	}
 }
