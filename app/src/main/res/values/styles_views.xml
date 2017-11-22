@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!-- ******************** Labels  ******************** -->
+    <style name="Label">
+        <item name="android:alpha">.86</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Label.Title">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:gravity">left</item>
+        <item name="android:padding">@dimen/margin_small</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="Label.Url">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:paddingRight">@dimen/margin_small</item>
+        <item name="android:paddingLeft">@dimen/margin_small</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/colorBlueLight</item>
+    </style>
+
+    <style name="Label.ImageInfo">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:paddingLeft">@dimen/margin_small</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="Label.ImageInfo.Likes">
+        <item name="android:gravity">left</item>
+    </style>
+
+
+
+</resources>

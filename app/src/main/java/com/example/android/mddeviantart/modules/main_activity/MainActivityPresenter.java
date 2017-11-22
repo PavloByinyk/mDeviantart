@@ -26,10 +26,21 @@ class MainActivityPresenter extends BasePresenter<IMainActivityContract.IModel, 
     public void onStart() {
         super.onStart();
         getView().initViews();
-        getView().showProgressBar(true);
-        getModel().requestAuth(this);
+
+        if(getModel().isUserAuth()){
+            getView().initFragmentPager();
+            return;
+        }else {
+            getView().showProgressBar(true);
+            getModel().requestAuth(this);
+        }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //getModel().clearSharedPref();
+    }
 
     @Override
     public void onSuccess() {

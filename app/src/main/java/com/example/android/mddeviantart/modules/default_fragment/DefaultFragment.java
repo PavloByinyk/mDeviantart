@@ -24,8 +24,14 @@ public class DefaultFragment extends BaseFragment implements IDefaultFragmentCon
 
 
     public static final String FRAGMENT_TAG = "fragment_tag";
-    public static final String KEY_MAINIMAGEDATA_PASS = "main_image_data";
-    private int tag;
+    public static final String KEY_PASS_LIST = "key_pass_list";
+    public static final String KEY_PASS_POSITION = "key_pass_position";
+    public static final String KEY_LAST_VISIBLE_ITEM = "key_last_visible_item";
+    public static final String KEY_SAVED_LIST = "key_saved_list";
+    public static final String KEY_OFFSET = "key_offset";
+
+    private int myTag;
+    private int mScrollPosition = -1;
 
     private IDefaultFragmentContract.IPresenter mPresenter;
 
@@ -34,32 +40,65 @@ public class DefaultFragment extends BaseFragment implements IDefaultFragmentCon
     private SwipeRefreshLayout swipeRefreshLayout;
 
 
-    public static DefaultFragment newInstance(int tag) {
+    public static DefaultFragment newInstance(int myTag) {
         Bundle args = new Bundle();
-        args.putInt(FRAGMENT_TAG, tag);
+        args.putInt(FRAGMENT_TAG, myTag);
         DefaultFragment fragment = new DefaultFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        tag = getArguments().getInt(FRAGMENT_TAG);
+        myTag = getArguments().getInt(FRAGMENT_TAG);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mPresenter.onDestroy();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv_images);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        recyclerView = view.findViewById(R.id.rv_images);
+        swipeRefreshLayout =  view.findViewById(R.id.swipeRefreshLayout);
 
         setPresenter(new DefaultFragmentPresenter(this));
         mPresenter.onStart();
-        mPresenter.getImages(tag);
+
+
+        if(savedInstanceState == null) {
+            mPresenter.getImages(myTag);
+        }
+        setRetainInstance(true);
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+        int scrollPosition = ((GridLayoutManager) recyclerView.getLayoutManager())
+                .findFirstCompletelyVisibleItemPosition();
+        bundle.putInt(KEY_OFFSET, mPresenter.getOffset());
+        bundle.putParcelableArrayList(KEY_SAVED_LIST, (ArrayList<? extends Parcelable>) adapter.getList());
+        bundle.putInt(KEY_LAST_VISIBLE_ITEM, scrollPosition);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle bundle) {
+        super.onViewStateRestored(bundle);
+        if(bundle != null) {
+            mPresenter.setOffset(bundle.getInt(KEY_OFFSET));
+            adapter.setList(bundle.<MainImageData>getParcelableArrayList(KEY_SAVED_LIST));
+            mScrollPosition = bundle.getInt(KEY_LAST_VISIBLE_ITEM);
+            recyclerView.scrollToPosition(mScrollPosition);
+        }
+    }
+
+
 
     @Override
     public int getLayoutId() {
@@ -97,27 +136,21 @@ public class DefaultFragment extends BaseFragment implements IDefaultFragmentCon
         if(swipeRefreshLayout.isRefreshing()){
             swipeRefreshLayout.setRefreshing(false);
         }
+        //recyclerView.scrollToPosition(mScrollPosition);
     }
 
-//    @Override
-//    public void onImageClick(MainImageData imageData) {
-//        Toast.makeText(getActivity(), imageData.getTitle(), Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(getActivity(), DetailActivity.class);
-//        intent.putExtra(KEY_MAINIMAGEDATA_PASS, imageData);
-//        startActivity(intent);
-//    }
 
     @Override
-    public void onImageClick(List<MainImageData> list) {
-        //Toast.makeText(getActivity(), imageData.getTitle(), Toast.LENGTH_SHORT).show();
+    public void onImageClick(List<MainImageData> list, int position) {
         Intent intent = new Intent(getActivity(), DetailActivity.class);
-        intent.putParcelableArrayListExtra(KEY_MAINIMAGEDATA_PASS, (ArrayList<? extends Parcelable>) list);
+        intent.putParcelableArrayListExtra(KEY_PASS_LIST, (ArrayList<? extends Parcelable>) list);
+        intent.putExtra(KEY_PASS_POSITION, position);
         startActivity(intent);
     }
 
     @Override
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(true);
-        mPresenter.getImages(tag);
+        mPresenter.getImages(myTag);
     }
 }

@@ -23,7 +23,6 @@ public class DefaultFragmentPresenter extends BasePresenter<IDefaultFragmentCont
     public void onStart() {
         super.onStart();
         getView().initViews();
-        //getModel().requestLoadImages(this);
     }
 
 
@@ -31,7 +30,6 @@ public class DefaultFragmentPresenter extends BasePresenter<IDefaultFragmentCont
     public void onSuccess(ImagesResponse response) {
         getView().showMsg(R.string.msg_success);
         getView().setListToAdapter(response.getResults());
-        ImagesResponse response1 = response;
     }
 
     @Override
@@ -42,6 +40,16 @@ public class DefaultFragmentPresenter extends BasePresenter<IDefaultFragmentCont
     @Override
     public void getImages(int tag) {
         getModel().requestLoadImages(this, tag);
+    }
+
+    @Override
+    public void setOffset(int offset) {
+        getModel().setOffset(offset);
+    }
+
+    @Override
+    public int getOffset() {
+        return getModel().getOffset();
     }
 
 }

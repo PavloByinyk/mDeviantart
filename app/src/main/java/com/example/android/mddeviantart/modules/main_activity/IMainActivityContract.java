@@ -28,6 +28,8 @@ public interface IMainActivityContract {
 
     interface IModel extends IBaseModel {
         void requestAuth(MainActivityModel.IRequestListener listener);
+        boolean isUserAuth();
+        //void clearSharedPref();
 
     }
 

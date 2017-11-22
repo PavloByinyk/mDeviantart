@@ -9,9 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.android.mddeviantart.R;
 import com.example.android.mddeviantart.pojo.response.images_data.MainImageData;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class MainImageAdapter extends RecyclerView.Adapter<MainImageAdapter.Imag
 
 
     public interface MainImageClickListener{
-        void onImageClick(List<MainImageData> imageData);
+        void onImageClick(List<MainImageData> imageData, int position);
     }
 
 
@@ -63,6 +64,10 @@ public class MainImageAdapter extends RecyclerView.Adapter<MainImageAdapter.Imag
         notifyDataSetChanged();
     }
 
+    public List<MainImageData> getList(){
+        return this.list;
+    }
+
     public class ImageHolder extends RecyclerView.ViewHolder{
 
         private ImageView ivImage;
@@ -77,9 +82,9 @@ public class MainImageAdapter extends RecyclerView.Adapter<MainImageAdapter.Imag
 
             if(mainImageData.getContent() != null) {
 
-                Picasso.with(context).load(mainImageData.getContent().getSrc())
-                        .placeholder(context.getResources().getDrawable(R.drawable.ic_launcher_background))
-                        .error(context.getResources().getDrawable(R.drawable.ic_launcher_background))
+                Glide.with(context)
+                        .load(mainImageData.getContent().getSrc())
+                        .apply(new RequestOptions().placeholder(R.drawable.ic_launcher_background).error(R.drawable.ic_launcher_background))
                         .into(ivImage);
             }else {
                 ivImage.setImageResource(R.drawable.ic_launcher_background);
@@ -88,7 +93,7 @@ public class MainImageAdapter extends RecyclerView.Adapter<MainImageAdapter.Imag
             ivImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onImageClick(list);
+                    listener.onImageClick(list, list.indexOf(mainImageData));
                 }
             });
         }

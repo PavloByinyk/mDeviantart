@@ -15,14 +15,20 @@ public interface IDefaultFragmentContract {
         void showMsg(int msg);
         void showMsg(String msg);
         void setListToAdapter(List<MainImageData> list);
+//        void updateOffset(int offset);
+//        int getOffset();
     }
 
     interface IPresenter extends IBasePresenter {
         void getImages(int tag);
+        void setOffset(int offset);
+        int getOffset();
     }
 
     interface IModel extends IBaseModel {
         void requestLoadImages(DefaultFragmentModel.IRequestListener listener, int tag);
+        void setOffset(int offset);
+        int getOffset();
     }
 
 }

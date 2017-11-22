@@ -5,12 +5,10 @@
 
     //labels
     <string name="label_fragment_hot">Hot</string>
-    <string name="label_fragment_likes">More like this</string>
+    <string name="label_fragment_lightning">Lightnings</string>
     <string name="label_fragment_photos">Photos</string>
     <string name="label_activity_main">Test</string>
     <string name="label_activity_detail">Detail</string>
-
-
 
     //msgs
     <string name="msg_success">Success</string>

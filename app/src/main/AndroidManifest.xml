@@ -23,16 +23,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".modules.detail_activity.DetailActivity"></activity>
-        <!--<activity-->
-            <!--android:label="@string/label_activity_detail"-->
-            <!--android:name=".modules.detail_activity.DetailActivity"-->
-            <!--android:parentActivityName=".modules.main_activity.MainActivity" >-->
-            <!--<meta-data-->
-                <!--android:name="android.support.PARENT_ACTIVITY"-->
-                <!--android:value=".modules.main_activity.MainActivity" />-->
-        <!--</activity>-->
-
+        <activity android:name=".modules.detail_activity.DetailActivity"
+            android:label="@string/label_activity_detail">
+        </activity>
 
     </application>
 

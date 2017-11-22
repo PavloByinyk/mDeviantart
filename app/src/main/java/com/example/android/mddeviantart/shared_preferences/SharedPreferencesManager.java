@@ -52,6 +52,15 @@ public class SharedPreferencesManager {
         }
     }
 
+    public void clearAllData(){
+
+
+        sharedPrefs.edit().clear().commit();
+
+//        SharedPreferences preferences = getSharedPreferences("Mypref", 0);
+//        preferences.edit().remove(MY_APP_PREFERENCES).commit();
+    }
+
 
 //    public void saveDatePref(String date){
 //        editor.putString(AUTH_ID, date);

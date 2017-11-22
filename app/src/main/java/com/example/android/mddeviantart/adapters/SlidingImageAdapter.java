@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.android.mddeviantart.R;
 import com.example.android.mddeviantart.pojo.response.images_data.MainImageData;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SlidingImageAdapter extends PagerAdapter {
@@ -45,30 +45,32 @@ public class SlidingImageAdapter extends PagerAdapter {
         View layout = inflater.inflate(R.layout.item_detail, view, false);
 
         assert layout != null;
-        final ImageView ivMain = (ImageView) layout.findViewById(R.id.iv_main);
-        final ImageView ivAuthor = (ImageView) layout.findViewById(R.id.iv_author);
-        final TextView tvUserName = (TextView) layout.findViewById(R.id.tv_author_name);
-        final TextView tvUrl = (TextView) layout.findViewById(R.id.tv_url);
-        final TextView tvLikes = (TextView) layout.findViewById(R.id.tv_image_likes);
-        final TextView tvImageTitle = (TextView) layout.findViewById(R.id.tv_image_title);
+        final ImageView ivMain =  layout.findViewById(R.id.iv_main);
+        final ImageView ivAuthor =  layout.findViewById(R.id.iv_author);
+        final TextView tvUserName =  layout.findViewById(R.id.tv_author_name);
+        final TextView tvUrl =  layout.findViewById(R.id.tv_url);
+        final TextView tvLikes =  layout.findViewById(R.id.tv_image_likes);
+        final TextView tvImageTitle =  layout.findViewById(R.id.tv_image_title);
 
         MainImageData mainImageData = list.get(position);
 
 
         if(mainImageData.getContent() != null) {
 
-            Picasso.with(context).load(mainImageData.getContent().getSrc())
-                    .placeholder(context.getResources().getDrawable(R.drawable.ic_launcher_background))
-                    .error(context.getResources().getDrawable(R.drawable.ic_launcher_background))
+
+            Glide.with(context)
+                    .load(mainImageData.getContent().getSrc())
+                    .apply(new RequestOptions().placeholder(R.drawable.ic_launcher_background).error(R.drawable.ic_launcher_background))
                     .into(ivMain);
         }
 
         if(mainImageData.getAuthor() != null) {
 
-            Picasso.with(context).load(mainImageData.getAuthor().getUsericon())
-                    .placeholder(context.getResources().getDrawable(R.drawable.ic_launcher_background))
-                    .error(context.getResources().getDrawable(R.drawable.ic_launcher_background))
+            Glide.with(context)
+                    .load(mainImageData.getAuthor().getUsericon())
+                    .apply(new RequestOptions().placeholder(R.drawable.ic_launcher_background).error(R.drawable.ic_launcher_background))
                     .into(ivAuthor);
+
             tvUserName.setText(mainImageData.getAuthor().getUsername());
         }
 

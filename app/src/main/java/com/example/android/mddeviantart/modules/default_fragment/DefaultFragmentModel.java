@@ -3,6 +3,7 @@ package com.example.android.mddeviantart.modules.default_fragment;
 import com.example.android.mddeviantart.R;
 import com.example.android.mddeviantart.base_mvp.BaseModel;
 import com.example.android.mddeviantart.modules.MyApplication;
+import com.example.android.mddeviantart.pojo.response.AuthResponse;
 import com.example.android.mddeviantart.pojo.response.ImagesResponse;
 import com.example.android.mddeviantart.utils.Constants;
 
@@ -36,7 +37,7 @@ public class DefaultFragmentModel extends BaseModel implements IDefaultFragmentC
             case R.string.label_fragment_hot:
                 call = getmApiService().getHot(MyApplication.sharedPreferencesManager.getAuthResponse().getAccessToken(), offset, Constants.LIMIT_DOWNLOAD);
                 break;
-            case R.string.label_fragment_likes:
+            case R.string.label_fragment_lightning:
                 call = getmApiService().getPopular(MyApplication.sharedPreferencesManager.getAuthResponse().getAccessToken(), offset, Constants.LIMIT_DOWNLOAD);
                 break;
             case R.string.label_fragment_photos:
@@ -44,10 +45,10 @@ public class DefaultFragmentModel extends BaseModel implements IDefaultFragmentC
                 break;
         }
 
-
         observe(call, new Callback<ImagesResponse>() {
             @Override
             public void onResponse(Call<ImagesResponse> call, Response<ImagesResponse> response) {
+
                 if(response.isSuccessful()){
                     hasMore = response.body().isHasMore();
                     offset += 10;
@@ -60,9 +61,18 @@ public class DefaultFragmentModel extends BaseModel implements IDefaultFragmentC
             @Override
             public void onFailure(Call<ImagesResponse> call, Throwable t) {
                 listener.onError(t.getMessage());
-
             }
         });
+    }
+
+    @Override
+    public int getOffset(){
+        return offset;
+    }
+
+    @Override
+    public void setOffset(int offset){
+        this.offset = offset;
     }
 
     interface IRequestListener{

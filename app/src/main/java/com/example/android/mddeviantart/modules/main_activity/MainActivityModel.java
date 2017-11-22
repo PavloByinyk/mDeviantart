@@ -36,10 +36,25 @@ public class MainActivityModel extends BaseModel implements IMainActivityContrac
 
             @Override
             public void onFailure(Call<AuthResponse> call, Throwable t) {
+
                 listener.onError(t.getMessage());
             }
         });
     }
+
+    @Override
+    public boolean isUserAuth() {
+        if(MyApplication.sharedPreferencesManager.getAuthResponse() != null){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+//    @Override
+//    public void clearSharedPref() {
+//        MyApplication.sharedPreferencesManager.clearAllData();
+//    }
 
     interface IRequestListener{
         void onSuccess();
