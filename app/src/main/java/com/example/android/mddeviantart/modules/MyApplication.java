@@ -5,7 +5,7 @@ import android.app.Application;
 
 import com.example.android.mddeviantart.shared_preferences.SharedPreferencesManager;
 
-public class MyApplication extends Application{
+public class MyApplication extends Application {
 
     public static SharedPreferencesManager sharedPreferencesManager;
 

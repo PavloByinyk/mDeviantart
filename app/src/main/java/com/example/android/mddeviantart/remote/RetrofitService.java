@@ -15,18 +15,14 @@ import retrofit2.http.Query;
 
 public interface RetrofitService {
 
-
     @GET("oauth2/token?grant_type=client_credentials")
     Call<AuthResponse> auth(@Query("client_id") int id, @Query("client_secret") String secretKey);
 
-
     @GET("api/v1/oauth2/browse/hot?offset=[offset]&limit=[limit]&access_token=[access_token]")
-    Call<ImagesResponse> getHot(@Query("access_token") String token, @Query("offset") int offset,@Query("limit") int limit);
+    Call<ImagesResponse> getHot(@Query("access_token") String token, @Query("offset") int offset, @Query("limit") int limit);
 
-
-    //morelikethis?seed=C0801604-7894-532E-BC8F-C4EE47273E6D&category=photography&access_token=Alph4num3r1ct0k3nv4lu3
     @GET("api/v1/oauth2/browse/morelikethis?seed=C0801604-7894-532E-BC8F-C4EE47273E6D&category=photography&limit=[limit]&access_token=[access_token]")
-    Call<ImagesResponse> getPopular(@Query("access_token") String token, @Query("offset") int offset, @Query("limit") int limit);
+    Call<ImagesResponse> getLightnings(@Query("access_token") String token, @Query("offset") int offset, @Query("limit") int limit);
 
     @GET("api/v1/oauth2/browse/popular?category_path=photography&q=clouds&timerange=1week&limit=[limit]&access_token=[access_token]")
     Call<ImagesResponse> getPhotography(@Query("access_token") String token, @Query("offset") int offset, @Query("limit") int limit);

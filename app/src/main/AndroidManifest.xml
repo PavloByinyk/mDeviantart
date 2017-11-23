@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.mddeviantart">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".modules.MyApplication"
@@ -23,12 +23,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".modules.detail_activity.DetailActivity"
-            android:label="@string/label_activity_detail">
-        </activity>
+        <activity
+            android:name=".modules.detail_activity.DetailActivity"
+            android:label="@string/label_activity_detail"/>
 
     </application>
-
 
 
 </manifest>

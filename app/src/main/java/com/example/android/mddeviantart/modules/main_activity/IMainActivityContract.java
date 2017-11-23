@@ -1,15 +1,10 @@
 package com.example.android.mddeviantart.modules.main_activity;
 
-
-import android.support.annotation.IdRes;
-
 import com.example.android.mddeviantart.base_mvp.IBaseModel;
 import com.example.android.mddeviantart.base_mvp.IBasePresenter;
 import com.example.android.mddeviantart.base_mvp.IBaseView;
 
-/**
- * Created by android on 11/15/17.
- */
+
 
 public interface IMainActivityContract {
 
@@ -29,8 +24,6 @@ public interface IMainActivityContract {
     interface IModel extends IBaseModel {
         void requestAuth(MainActivityModel.IRequestListener listener);
         boolean isUserAuth();
-        //void clearSharedPref();
-
     }
 
 

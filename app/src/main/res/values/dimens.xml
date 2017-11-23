@@ -6,16 +6,12 @@
 
     <dimen name="padding_large">60dp</dimen>
 
-
-
-    <dimen name="big_height">200dp</dimen>
-
-
     <dimen name="text_size_medium">16sp</dimen>
     <dimen name="text_size_small">10sp</dimen>
 
-
-
+    <dimen name="image_user_icon_size">120dp</dimen>
+    <dimen name="image_photo_size">300dp</dimen>
+    <dimen name="view_default_size">60dp</dimen>
 
 
 </resources>

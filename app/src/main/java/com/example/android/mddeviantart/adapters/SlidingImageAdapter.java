@@ -23,10 +23,9 @@ public class SlidingImageAdapter extends PagerAdapter {
     private LayoutInflater inflater;
     private Context context;
 
-
     public SlidingImageAdapter(Context context, List<MainImageData> list) {
         this.context = context;
-        this.list=list;
+        this.list = list;
         inflater = LayoutInflater.from(context);
     }
 
@@ -45,27 +44,24 @@ public class SlidingImageAdapter extends PagerAdapter {
         View layout = inflater.inflate(R.layout.item_detail, view, false);
 
         assert layout != null;
-        final ImageView ivMain =  layout.findViewById(R.id.iv_main);
-        final ImageView ivAuthor =  layout.findViewById(R.id.iv_author);
-        final TextView tvUserName =  layout.findViewById(R.id.tv_author_name);
-        final TextView tvUrl =  layout.findViewById(R.id.tv_url);
-        final TextView tvLikes =  layout.findViewById(R.id.tv_image_likes);
-        final TextView tvImageTitle =  layout.findViewById(R.id.tv_image_title);
+        final ImageView ivMain = layout.findViewById(R.id.iv_main);
+        final ImageView ivAuthor = layout.findViewById(R.id.iv_author);
+        final TextView tvUserName = layout.findViewById(R.id.tv_author_name);
+        final TextView tvUrl = layout.findViewById(R.id.tv_url);
+        final TextView tvLikes = layout.findViewById(R.id.tv_image_likes);
+        final TextView tvImageTitle = layout.findViewById(R.id.tv_image_title);
 
         MainImageData mainImageData = list.get(position);
 
 
-        if(mainImageData.getContent() != null) {
-
-
+        if (mainImageData.getContent() != null) {
             Glide.with(context)
                     .load(mainImageData.getContent().getSrc())
                     .apply(new RequestOptions().placeholder(R.drawable.ic_launcher_background).error(R.drawable.ic_launcher_background))
                     .into(ivMain);
         }
 
-        if(mainImageData.getAuthor() != null) {
-
+        if (mainImageData.getAuthor() != null) {
             Glide.with(context)
                     .load(mainImageData.getAuthor().getUsericon())
                     .apply(new RequestOptions().placeholder(R.drawable.ic_launcher_background).error(R.drawable.ic_launcher_background))

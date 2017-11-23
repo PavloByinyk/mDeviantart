@@ -12,21 +12,19 @@ import com.example.android.mddeviantart.modules.default_fragment.DefaultFragment
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleFragmentPagerAdapter extends FragmentStatePagerAdapter {
+public class FragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     private Context mContext;
-    private FragmentManager fm;
     private List<DefaultFragment> fragmentsList = new ArrayList<>();
 
-    public SimpleFragmentPagerAdapter(Context context, FragmentManager fm) {
+    public FragmentPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         this.mContext = context;
-        this.fm = fm;
     }
 
     @Override
     public Fragment getItem(int position) {
-            return fragmentsList.get(position);
+        return fragmentsList.get(position);
     }
 
     @Override
@@ -48,7 +46,7 @@ public class SimpleFragmentPagerAdapter extends FragmentStatePagerAdapter {
         }
     }
 
-    public void addFragment(DefaultFragment fragment){
+    public void addFragment(DefaultFragment fragment) {
         fragmentsList.add(fragment);
     }
 

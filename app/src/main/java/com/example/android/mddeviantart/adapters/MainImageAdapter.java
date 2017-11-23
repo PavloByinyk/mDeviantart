@@ -23,9 +23,7 @@ public class MainImageAdapter extends RecyclerView.Adapter<MainImageAdapter.Imag
     private MainImageClickListener listener;
     private List<MainImageData> list;
 
-
-
-    public interface MainImageClickListener{
+    public interface MainImageClickListener {
         void onImageClick(List<MainImageData> imageData, int position);
     }
 
@@ -37,56 +35,55 @@ public class MainImageAdapter extends RecyclerView.Adapter<MainImageAdapter.Imag
 
     @Override
     public ImageHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater=LayoutInflater.from(parent.getContext());
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_image, parent, false);
         return new ImageHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ImageHolder holder, int position) {
-            holder.bind(list.get(position));
+        holder.bind(list.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if(this.list == null){
+        if (this.list == null) {
             return 0;
-        }else {
+        } else {
             return list.size();
         }
     }
 
-    public void setList(List<MainImageData> list){
-        if(this.list == null){
+    public void setList(List<MainImageData> list) {
+        if (this.list == null) {
             this.list = new ArrayList<>();
         }
         this.list.addAll(list);
         notifyDataSetChanged();
     }
 
-    public List<MainImageData> getList(){
+    public List<MainImageData> getList() {
         return this.list;
     }
 
-    public class ImageHolder extends RecyclerView.ViewHolder{
+    public class ImageHolder extends RecyclerView.ViewHolder {
 
         private ImageView ivImage;
 
 
-        public ImageHolder(View itemView) {
+        private ImageHolder(View itemView) {
             super(itemView);
-            ivImage = (ImageView) itemView.findViewById(R.id.iv_image);
+            ivImage = itemView.findViewById(R.id.iv_image);
         }
 
-        public void bind(final MainImageData mainImageData){
+        public void bind(final MainImageData mainImageData) {
 
-            if(mainImageData.getContent() != null) {
-
+            if (mainImageData.getContent() != null) {
                 Glide.with(context)
                         .load(mainImageData.getContent().getSrc())
                         .apply(new RequestOptions().placeholder(R.drawable.ic_launcher_background).error(R.drawable.ic_launcher_background))
                         .into(ivImage);
-            }else {
+            } else {
                 ivImage.setImageResource(R.drawable.ic_launcher_background);
             }
 

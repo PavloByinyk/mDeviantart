@@ -20,7 +20,7 @@ import com.example.android.mddeviantart.pojo.response.images_data.MainImageData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultFragment extends BaseFragment implements IDefaultFragmentContract.IView, MainImageAdapter.MainImageClickListener, SwipeRefreshLayout.OnRefreshListener{
+public class DefaultFragment extends BaseFragment implements IDefaultFragmentContract.IView, MainImageAdapter.MainImageClickListener, SwipeRefreshLayout.OnRefreshListener {
 
 
     public static final String FRAGMENT_TAG = "fragment_tag";
@@ -34,7 +34,6 @@ public class DefaultFragment extends BaseFragment implements IDefaultFragmentCon
     private int mScrollPosition = -1;
 
     private IDefaultFragmentContract.IPresenter mPresenter;
-
     private RecyclerView recyclerView;
     private MainImageAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -65,13 +64,12 @@ public class DefaultFragment extends BaseFragment implements IDefaultFragmentCon
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.rv_images);
-        swipeRefreshLayout =  view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
         setPresenter(new DefaultFragmentPresenter(this));
         mPresenter.onStart();
 
-
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             mPresenter.getImages(myTag);
         }
         setRetainInstance(true);
@@ -90,15 +88,13 @@ public class DefaultFragment extends BaseFragment implements IDefaultFragmentCon
     @Override
     public void onViewStateRestored(@Nullable Bundle bundle) {
         super.onViewStateRestored(bundle);
-        if(bundle != null) {
+        if (bundle != null) {
             mPresenter.setOffset(bundle.getInt(KEY_OFFSET));
             adapter.setList(bundle.<MainImageData>getParcelableArrayList(KEY_SAVED_LIST));
             mScrollPosition = bundle.getInt(KEY_LAST_VISIBLE_ITEM);
             recyclerView.scrollToPosition(mScrollPosition);
         }
     }
-
-
 
     @Override
     public int getLayoutId() {
@@ -119,7 +115,6 @@ public class DefaultFragment extends BaseFragment implements IDefaultFragmentCon
         swipeRefreshLayout.setOnRefreshListener(this);
     }
 
-
     @Override
     public void showMsg(int msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
@@ -133,10 +128,9 @@ public class DefaultFragment extends BaseFragment implements IDefaultFragmentCon
     @Override
     public void setListToAdapter(List<MainImageData> list) {
         adapter.setList(list);
-        if(swipeRefreshLayout.isRefreshing()){
+        if (swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.setRefreshing(false);
         }
-        //recyclerView.scrollToPosition(mScrollPosition);
     }
 
 

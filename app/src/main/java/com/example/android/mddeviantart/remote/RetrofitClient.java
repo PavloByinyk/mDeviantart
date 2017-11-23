@@ -1,7 +1,6 @@
 package com.example.android.mddeviantart.remote;
 
 
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -53,51 +52,10 @@ public class RetrofitClient {
             Request request = chain.request();
 
             Request.Builder builder = request.newBuilder();
-            builder.addHeader("Accept","application/json");
+            builder.addHeader("Accept", "application/json");
 
             return chain.proceed(builder.build());
         }
     }
-
-//    private static void updateDeviceToken(final String deviceToken){
-//        if(StringUtils.isNullOrEmpty(deviceToken))
-//            return;
-//
-//        if(!SharedPreferencesUtils.getInstance().getToken().equals(mToken)){
-//            getRetrofitService().setDeviceToken(new DeviceToken(deviceToken)).enqueue(new Callback<PrimitiveServerResponse>() {
-//                @Override
-//                public void onResponse(Call<PrimitiveServerResponse> call, retrofit2.Response<PrimitiveServerResponse> response) {
-//                    mToken = SharedPreferencesUtils.getInstance().getToken();
-//                }
-//
-//                @Override
-//                public void onFailure(Call<PrimitiveServerResponse> call, Throwable t) {
-//
-//                }
-//            });
-//        }
-//    }
-
-//    private static class ReceiveCookiesInterceptor implements Interceptor {
-//        @Override
-//        public Response intercept(Chain chain) throws IOException {
-//            Request original = chain.request();
-//            Response response = chain.proceed(original);
-//            String tokenValue = response.header(X_AUTH_TOKEN);
-//
-//            if(!StringUtils.isNullOrEmpty(tokenValue)){
-//                SharedPreferencesUtils.getInstance().setToken(tokenValue);
-//                updateDeviceToken(SharedPreferencesUtils.getInstance().getDeviceToken());
-//            }
-//
-//            return response;
-//        }
-//    }
-//
-//    private static HttpLoggingInterceptor getLoggingInterceptorInstance() {
-//        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-//        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//        return loggingInterceptor;
-//    }
 
 }

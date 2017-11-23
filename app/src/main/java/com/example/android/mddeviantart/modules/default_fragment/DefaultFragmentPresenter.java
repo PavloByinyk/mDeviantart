@@ -6,7 +6,7 @@ import com.example.android.mddeviantart.base_mvp.BasePresenter;
 import com.example.android.mddeviantart.pojo.response.ImagesResponse;
 
 public class DefaultFragmentPresenter extends BasePresenter<IDefaultFragmentContract.IModel, IDefaultFragmentContract.IView>
-        implements IDefaultFragmentContract.IPresenter, DefaultFragmentModel.IRequestListener{
+        implements IDefaultFragmentContract.IPresenter, DefaultFragmentModel.IRequestListener {
 
 
     public DefaultFragmentPresenter(IDefaultFragmentContract.IView mView) {
@@ -18,13 +18,11 @@ public class DefaultFragmentPresenter extends BasePresenter<IDefaultFragmentCont
         return new DefaultFragmentModel();
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
         getView().initViews();
     }
-
 
     @Override
     public void onSuccess(ImagesResponse response) {

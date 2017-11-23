@@ -15,8 +15,6 @@ public interface IDefaultFragmentContract {
         void showMsg(int msg);
         void showMsg(String msg);
         void setListToAdapter(List<MainImageData> list);
-//        void updateOffset(int offset);
-//        int getOffset();
     }
 
     interface IPresenter extends IBasePresenter {

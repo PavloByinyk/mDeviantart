@@ -1,10 +1,6 @@
 package com.example.android.mddeviantart.base_mvp;
 
-//abstract class BasePresenter<out M : IBaseModel, out V : IBaseView<out IBasePresenter>>(view: V) : IBasePresenter{
-
-
-
-public abstract class BasePresenter<M extends IBaseModel, V extends IBaseView<? extends IBasePresenter>> implements IBasePresenter{
+public abstract class BasePresenter<M extends IBaseModel, V extends IBaseView<? extends IBasePresenter>> implements IBasePresenter {
 
     private M mModel = null;
     private V mView;
@@ -29,60 +25,23 @@ public abstract class BasePresenter<M extends IBaseModel, V extends IBaseView<? 
     }
 
 
-    private void lazyInitModel(){
+    private void lazyInitModel() {
 
-        if(mModel == null){
-            synchronized (this){
-                if (mModel == null){
+        if (mModel == null) {
+            synchronized (this) {
+                if (mModel == null) {
                     mModel = provideModel();
                 }
             }
         }
     }
 
-    public M getModel(){
+    public M getModel() {
         lazyInitModel();
         return mModel;
     }
 
-    public V getView(){
+    public V getView() {
         return mView;
     }
 }
-
-
-//    private var mView: V = view
-//private var mModel: M? = null
-//
-//@CallSuper
-//    override fun onStart() {
-//            lazyInitModel()
-//            mModel!!.init()
-//            }
-//
-//
-//
-//@CallSuper
-//    override fun onDestroy() {
-//            lazyInitModel()
-//            mModel!!.onDestroy()
-//            }
-//
-//            fun getModel(): M? {
-//            lazyInitModel()
-//            return mModel
-//            }
-//
-//            fun getView(): V = mView
-//
-//protected abstract fun provideModel(): M
-//
-//private fun lazyInitModel() {
-//        if (mModel == null) {
-//synchronized(this) {
-//        if (mModel == null) {
-//        mModel = provideModel()
-//        }
-//        }
-//        }
-//        }
